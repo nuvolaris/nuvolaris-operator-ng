@@ -15,6 +15,9 @@
 # specific language governing permissions and limitations
 # under the License.
 #
+[virtualenvs]
+prefer-active-python = true
+
 [tool.poetry]
 name = "nuvolaris"
 version = "4.0.0"
