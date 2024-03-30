@@ -1,1 +1,1 @@
-# operator-manager
+# nuvolaris-operator-ng
