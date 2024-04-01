@@ -1,4 +1,4 @@
 [submodule "image/openwhisk"]
 	path = image/openwhisk
-	url = git@github.com:nuvolarisinc/openwhisk
-	branch = nuvolaris
+	url = git@github.com:nuvolaris/openwhisk
+	branch = master
