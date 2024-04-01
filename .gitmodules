@@ -6,3 +6,7 @@
 	path = plugins/community
 	url = git@github.com:nuvolaris/nuvolaris-operator
 	branch = nuvolaris-ng
+[submodule "olaris"]
+	path = olaris
+	url = git@github.com:nuvolaris/olaris
+	branch = 4.0.0-testing
