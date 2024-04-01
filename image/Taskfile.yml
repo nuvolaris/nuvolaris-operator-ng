@@ -1,15 +1,15 @@
 version: 3
 
 vars:
-  IMG: ghrc.io/nuvolarisinc/nuvolaris-operator-ng
-  BASETAG: 4.0.0-openserverless
-  DOCKER_PLATFORM: "--platform linux/amd64,linux/arm64" 
-  DOCKER_FLAGS: "--push"
   DRY: ""
+  IMAGE: ghcr.io/{{or .GITHUB_USER "nuvolaris"}}/nuvolaris-operator-ng
+  BASETAG: 4.0.0-openserverless
   TAG:
     sh: git describe --tags --abbrev=0 2>/dev/null || echo latest
 
 tasks:
+
+  info: echo IMAGE={{.IMAGE}}
 
   image-tag: 
     silent: true
@@ -26,21 +26,27 @@ tasks:
     - docker buildx create --name mybuilder --bootstrap --use
 
   openwhisk-standalone:
-    dir: openwhisk
+    dir: image/openwhisk
     cmds:
     - bash ../build-standalone.bash
     status:
     - test -e bin/openwhisk-standalone.jar
 
   build:
+    dir: image
     cmds:
     - task: openwhisk-standalone
     - >
-      {{.DRY}} docker buildx build -t "{{.IMG}}:{{.TAG}}"  {{.DOCKER_PLATFORM}} . "{{.DOCKER_FLAGS}}"
-
-  local-build:
+       {{.DRY}} docker buildx build 
+       -t "{{.IMAGE}}:{{.TAG}}"  
+       {{or .PLATFORM  "--platform linux/amd64,linux/arm64"}}
+       {{or .FLAGS "--push"}} . 
+  
+  build-dev:
     cmds:
-    - task build DOCKER_PLATFORM="" DOCKER_FLAGS="--load"
-
+    - task: build 
+      vars: 
+        PLATFORM: "" 
+          
   local-run:
     - docker run -ti "{{.IMG}}" bash

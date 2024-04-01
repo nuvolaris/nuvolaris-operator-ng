@@ -1,0 +1,14 @@
+version: 3
+
+dotenv: [.env]
+
+
+import:
+  - Taskvars.yml
+
+includes:
+  image: ./image
+
+tasks:
+  test: echo {{.GITHUB_USER}}
+

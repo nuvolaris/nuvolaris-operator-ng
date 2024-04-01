@@ -1,1 +1,4 @@
 .git-hooks/
+.env
+.env.src
+.env.nuv
