@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "nuvolaris-operator-ng"
+version = "4.0.0"
+description = "Nuvolaris Operator NextGeneration"
+authors = ["Michele Sciabarra <michele@nuvolaris.io>"]
+license = "Apache 2.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+kopf = {extras = ["full-auth", "uvloop"], version = "^1.37.1"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

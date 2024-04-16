@@ -1,0 +1,8 @@
+version: 3
+
+tasks:
+
+  create:
+    desc: create operator in kubernetes
+    cmds:
+    - echo "create"

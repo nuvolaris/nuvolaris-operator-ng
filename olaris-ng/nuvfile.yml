@@ -1,0 +1,9 @@
+version: 3
+
+tasks:
+
+  kubernetes:
+    desc: create operator in kubernetes
+
+  nuvolaris:
+    desc: create cluster

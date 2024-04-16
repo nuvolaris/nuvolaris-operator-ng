@@ -6,3 +6,5 @@ includes:
   image: ./image
 
 
+tasks:
+  setup: {silent:true}

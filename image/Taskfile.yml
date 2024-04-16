@@ -46,7 +46,11 @@ tasks:
     cmds:
     - task: build 
       vars: 
-        PLATFORM: "" 
+         PLATFORM: " " 
           
-  local-run:
-    - docker run -ti "{{.IMG}}" bash
+  run-dev:
+    - > 
+      docker run -ti 
+      -v $HOME/.kube:/home/nuvolaris/.kube 
+      -v $PWD:/home/nuvolaris/operator 
+      "{{.IMAGE}}:{{.TAG}}" bash

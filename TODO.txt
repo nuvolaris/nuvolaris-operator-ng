@@ -1,0 +1,9 @@
+- Build image
+- Create an operator listening to setup events
+- When an event happens, it clones the plugin and register them
+  - each plugin has a nuvops.json listing the plugins to register
+- start the operator registering initial components
+- deploy the plugin 
+  - the operator can update itself restarting and registering the new components?
+
+

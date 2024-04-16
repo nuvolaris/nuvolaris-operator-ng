@@ -96,30 +96,26 @@ RUN \
 RUN groupadd --gid 1000 nuvolaris
 RUN useradd -m nuvolaris -s /bin/bash --uid 1000 --gid 1000 --groups root
 RUN echo "nuvolaris ALL=(ALL:ALL) NOPASSWD: ALL" >>/etc/sudoers
-
 # install java and python
 USER nuvolaris
 WORKDIR /home/nuvolaris
 RUN curl -s "https://get.sdkman.io" | bash 
-RUN git clone https://github.com/pyenv/pyenv.git /home/nuvolaris/.pyenv 
-RUN git clone https://github.com/nuvolarisinc/nuvolaris-operator-ng operator
 RUN echo "source ~/.sdkman/bin/sdkman-init.sh" >>~/.bashrc ;\
-    echo 'eval "$(pyenv init --path)"' >>~/.bashrc ;\
-    echo 'eval "$(pyenv init)"' >>~/.bashrc ;\
     echo "source ~/operator/aliases" >>~/.bashrc 
 # operator
-ENV PATH=/home/nuvolaris/.pyenv/bin:/home/nuvolaris/.local/bin:/usr/local/bin:/usr/bin:/sbin:/bin:/usr/nuvolaris
+ENV PATH=/home/nuvolaris/.local/bin:/usr/local/bin:/usr/bin:/sbin:/bin:/usr/nuvolaris
 RUN bash -c "source ~/.sdkman/bin/sdkman-init.sh ; sdk install java $JAVA_VERSION"
-RUN bash -c "source ~/.bashrc ; pyenv install $PYENV_VERSION"
 # openwhisk
 COPY openwhisk/bin/openwhisk-standalone.jar openwhisk/openwhisk-standalone.jar
 COPY runtimes.json standalone.conf openwhisk
-WORKDIR /home/nuvolaris/operator
-#RUN curl -sSL https://install.python-poetry.org | python3 -
+# poetry
+RUN curl -sSL https://install.python-poetry.org | python3 -
+WORKDIR /home/nuvolaris
+#RUN git clone https://github.com/pyenv/pyenv.git /home/nuvolaris/.pyenv 
 #RUN poetry install
-# USER root
-# RUN chown -R nuvolaris /home/nuvolaris ;\
-#      chgrp -R root /home/nuvolaris ;\
-#      chmod -R 0775 /home/nuvolaris
-# USER nuvolaris
-# CMD sleep inf
+USER root
+RUN chown -R nuvolaris /home/nuvolaris ;\
+    chgrp -R root /home/nuvolaris ;\
+    chmod -R 0775 /home/nuvolaris
+USER nuvolaris
+CMD sleep inf
