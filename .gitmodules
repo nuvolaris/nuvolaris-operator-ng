@@ -2,10 +2,6 @@
 	path = image/openwhisk
 	url = git@github.com:nuvolaris/openwhisk
 	branch = master
-[submodule "plugins/community"]
-	path = plugins/community
-	url = git@github.com:nuvolaris/nuvolaris-operator
-	branch = nuvolaris-ng
 [submodule "olaris"]
 	path = olaris
 	url = git@github.com:nuvolaris/olaris
